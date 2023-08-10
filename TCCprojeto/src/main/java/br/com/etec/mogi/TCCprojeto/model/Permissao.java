@@ -1,6 +1,8 @@
 package br.com.etec.mogi.TCCprojeto.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +15,11 @@ public class Permissao {
     private String nomepermissao;
     private String descricao;
     private Integer codigopermissao;
+
+    @OneToMany(mappedBy = "permissao")
+    private List<Usuariopermissao> usuariopermissaos = new ArrayList<>();
+
+
 
     public Integer getId() {
         return id;

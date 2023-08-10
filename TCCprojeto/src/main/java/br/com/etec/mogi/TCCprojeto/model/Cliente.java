@@ -1,6 +1,8 @@
 package br.com.etec.mogi.TCCprojeto.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +18,15 @@ public class Cliente {
     private String tele2;
     private String CPF;
     private String RG;
+
+    @ManyToOne
+    @JoinColumn(name = "idcidade")
+    private Cidade cidade;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Animal> animaiscliente = new ArrayList<>();
+
+
 
     public Integer getId() {
         return id;

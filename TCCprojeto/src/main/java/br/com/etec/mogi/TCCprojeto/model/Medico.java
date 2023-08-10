@@ -2,6 +2,8 @@ package br.com.etec.mogi.TCCprojeto.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +16,12 @@ public class Medico {
     private String telefone;
     private String CPF;
     private String RG;
+
+    @OneToMany(mappedBy = "medico")
+    private List<Consulta> consultasmedico = new ArrayList<>();
+
+    @OneToMany(mappedBy = "medico")
+    private List<Agenda> agendamedico = new ArrayList<>();
 
     public Integer getId() {
         return id;

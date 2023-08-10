@@ -13,6 +13,10 @@ public class Agenda {
     private Date dataconsulta;
     private Date horaconsulta;
 
+    @ManyToOne
+    @JoinColumn(name = "idmedico")
+    private Medico medico;
+
     public Integer getId() {
         return id;
     }
