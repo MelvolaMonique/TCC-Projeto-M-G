@@ -16,10 +16,6 @@ public class Permissao {
     private String descricao;
     private Integer codigopermissao;
 
-    @OneToMany(mappedBy = "permissao")
-    private List<Usuariopermissao> usuariopermissaos = new ArrayList<>();
-
-
 
     public Integer getId() {
         return id;

@@ -12,13 +12,17 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+   private Long codigo;
     private String nomeusuario;
     private String tele1;
     private String email;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Usuariopermissao> usuariopermissaos = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuariopermissao", joinColumns = @JoinColumn(name = "codigousuario")
+  , inverseJoinColumns = @JoinColumn(name = "codigopermissao"))
+  private List<Permissao> permissoes;
+
 
     public Integer getId() {
         return id;
