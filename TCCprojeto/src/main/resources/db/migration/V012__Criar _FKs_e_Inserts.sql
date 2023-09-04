@@ -26,5 +26,4 @@ insert into cidade values
 (1,'itatiba','SP',)
 
 -- insert consulta
-insert into consulta values
-(1, );
+

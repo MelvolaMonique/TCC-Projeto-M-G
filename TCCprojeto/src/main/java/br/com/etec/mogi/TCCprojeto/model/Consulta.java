@@ -1,6 +1,7 @@
 package br.com.etec.mogi.TCCprojeto.model;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,7 +13,7 @@ public class Consulta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date data;
-    private Date hora;
+    private Time hora;
     private String historico;
 
     @ManyToOne
@@ -43,11 +44,27 @@ public class Consulta {
         return hora;
     }
 
-    public void setHora(Date hora) {
-        this.hora = hora;
-    }
+  public void setHora(Time hora) {
+    this.hora = hora;
+  }
 
-    public String getHistorico() {
+  public Animal getAnimal() {
+    return animal;
+  }
+
+  public void setAnimal(Animal animal) {
+    this.animal = animal;
+  }
+
+  public Medico getMedico() {
+    return medico;
+  }
+
+  public void setMedico(Medico medico) {
+    this.medico = medico;
+  }
+
+  public String getHistorico() {
         return historico;
     }
 
