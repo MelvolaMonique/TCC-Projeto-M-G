@@ -10,21 +10,21 @@ alter table consulta add constraint FK_consulta_medico foreign key(idmedico) ref
 
 alter table cliente add constraint Fk_cliente_cidade foreign key(idcidade) references cidade(id);
 
---insert agenda
-insert into medico values
-(1, 'Márcio', 14997736147,  )
 
-insert into agenda values
-(1,'2000-03-13', 1);
+insert into medico(id,nome, telefone, CPF,RG) values
+(1, 'Marcio','(14)99773-6147','905.550.860-89','30.896.574-7' )
+
+insert into agenda(id,datahoraconsulta, idmedico) values
+(1,"2000-03-13", 1);
 
 --insert Animal
 
-insert into animal values
+insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values
 (1, 'alberto', '3','F','não',1,1,1);
 
 --insert cidade
 
-insert into cidade values
+insert into cidade(id, nomecidade, estado) values
 (1,'itatiba','SP',)
 
 
