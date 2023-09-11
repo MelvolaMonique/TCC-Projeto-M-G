@@ -12,8 +12,7 @@ public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date data;
-    private Time hora;
+    private Date datahora;
     private String historico;
 
     @ManyToOne
@@ -32,20 +31,12 @@ public class Consulta {
         this.id = id;
     }
 
-    public Date getData() {
-        return data;
-    }
+  public Date getDatahora() {
+    return datahora;
+  }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public Date getHora() {
-        return hora;
-    }
-
-  public void setHora(Time hora) {
-    this.hora = hora;
+  public void setDatahora(Date datahora) {
+    this.datahora = datahora;
   }
 
   public Animal getAnimal() {
@@ -71,6 +62,8 @@ public class Consulta {
     public void setHistorico(String historico) {
         this.historico = historico;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

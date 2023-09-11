@@ -63,7 +63,23 @@ public class Medico {
         this.RG = RG;
     }
 
-    @Override
+  public List<Consulta> getConsultasmedico() {
+    return consultasmedico;
+  }
+
+  public void setConsultasmedico(List<Consulta> consultasmedico) {
+    this.consultasmedico = consultasmedico;
+  }
+
+  public List<Agenda> getAgendamedico() {
+    return agendamedico;
+  }
+
+  public void setAgendamedico(List<Agenda> agendamedico) {
+    this.agendamedico = agendamedico;
+  }
+
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Medico)) return false;

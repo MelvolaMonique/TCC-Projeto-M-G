@@ -34,7 +34,15 @@ public class Especie {
         this.descricao = descricao;
     }
 
-    @Override
+  public List<Animal> getAnimaisespecie() {
+    return animaisespecie;
+  }
+
+  public void setAnimaisespecie(List<Animal> animaisespecie) {
+    this.animaisespecie = animaisespecie;
+  }
+
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Especie)) return false;

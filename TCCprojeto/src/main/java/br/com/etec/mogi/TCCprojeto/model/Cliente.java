@@ -84,7 +84,23 @@ public class Cliente {
         this.RG = RG;
     }
 
-    @Override
+  public Cidade getCidade() {
+    return cidade;
+  }
+
+  public void setCidade(Cidade cidade) {
+    this.cidade = cidade;
+  }
+
+  public List<Animal> getAnimaiscliente() {
+    return animaiscliente;
+  }
+
+  public void setAnimaiscliente(List<Animal> animaiscliente) {
+    this.animaiscliente = animaiscliente;
+  }
+
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cliente)) return false;

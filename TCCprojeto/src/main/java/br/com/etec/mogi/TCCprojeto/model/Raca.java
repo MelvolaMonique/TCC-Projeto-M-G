@@ -33,7 +33,15 @@ public class Raca {
         this.descricao = descricao;
     }
 
-    @Override
+  public List<Animal> getAnimaisraca() {
+    return animaisraca;
+  }
+
+  public void setAnimaisraca(List<Animal> animaisraca) {
+    this.animaisraca = animaisraca;
+  }
+
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Raca)) return false;

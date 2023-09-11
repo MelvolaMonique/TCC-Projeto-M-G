@@ -72,7 +72,39 @@ public class Animal {
         this.castracao = castracao;
     }
 
-    @Override
+  public List<Consulta> getConsultasanimal() {
+    return consultasanimal;
+  }
+
+  public void setConsultasanimal(List<Consulta> consultasanimal) {
+    this.consultasanimal = consultasanimal;
+  }
+
+  public Raca getRaca() {
+    return raca;
+  }
+
+  public void setRaca(Raca raca) {
+    this.raca = raca;
+  }
+
+  public Especie getEspecie() {
+    return especie;
+  }
+
+  public void setEspecie(Especie especie) {
+    this.especie = especie;
+  }
+
+  public Cliente getCliente() {
+    return cliente;
+  }
+
+  public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
+  }
+
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Animal)) return false;

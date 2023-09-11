@@ -56,7 +56,23 @@ public class Usuario {
         this.email = email;
     }
 
-    @Override
+  public Long getCodigo() {
+    return codigo;
+  }
+
+  public void setCodigo(Long codigo) {
+    this.codigo = codigo;
+  }
+
+  public List<Permissao> getPermissoes() {
+    return permissoes;
+  }
+
+  public void setPermissoes(List<Permissao> permissoes) {
+    this.permissoes = permissoes;
+  }
+
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario)) return false;

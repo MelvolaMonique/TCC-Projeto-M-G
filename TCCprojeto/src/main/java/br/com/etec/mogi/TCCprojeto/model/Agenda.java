@@ -10,8 +10,7 @@ public class Agenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date dataconsulta;
-    private Date horaconsulta;
+    private Date datahoraconsulta;
 
     @ManyToOne
     @JoinColumn(name = "idmedico")
@@ -25,23 +24,24 @@ public class Agenda {
         this.id = id;
     }
 
-    public Date getDataconsulta() {
-        return dataconsulta;
-    }
+  public Date getDatahoraconsulta() {
+    return datahoraconsulta;
+  }
 
-    public void setDataconsulta(Date dataconsulta) {
-        this.dataconsulta = dataconsulta;
-    }
+  public void setDatahoraconsulta(Date datahoraconsulta) {
+    this.datahoraconsulta = datahoraconsulta;
+  }
 
-    public Date getHoraconsulta() {
-        return horaconsulta;
-    }
+  public Medico getMedico() {
+    return medico;
+  }
 
-    public void setHoraconsulta(Date horaconsulta) {
-        this.horaconsulta = horaconsulta;
-    }
+  public void setMedico(Medico medico) {
+    this.medico = medico;
+  }
 
-    @Override
+
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Agenda)) return false;

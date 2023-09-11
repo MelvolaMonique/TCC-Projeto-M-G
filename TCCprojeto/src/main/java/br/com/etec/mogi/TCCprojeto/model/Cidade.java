@@ -42,7 +42,15 @@ public class Cidade {
         this.estado = estado;
     }
 
-    @Override
+  public List<Cliente> getClientescidade() {
+    return clientescidade;
+  }
+
+  public void setClientescidade(List<Cliente> clientescidade) {
+    this.clientescidade = clientescidade;
+  }
+
+  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cidade)) return false;
