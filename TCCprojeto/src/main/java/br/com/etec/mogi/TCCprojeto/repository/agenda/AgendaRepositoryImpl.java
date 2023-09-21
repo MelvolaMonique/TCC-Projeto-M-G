@@ -2,6 +2,9 @@ package br.com.etec.mogi.TCCprojeto.repository.agenda;
 
 import br.com.etec.mogi.TCCprojeto.model.Agenda;
 import br.com.etec.mogi.TCCprojeto.repository.filter.AgendaFilter;
+import br.com.etec.mogi.TCCprojeto.repository.projections.AgendaDTO;
+import br.com.etec.mogi.TCCprojeto.repository.projections.AnimalDTO;
+import com.mysql.cj.log.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,41 +22,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
+
   @PersistenceContext
   private EntityManager manager;
 
   @Override
-  public Page<Agenda> Filtrar(AgendaFilter agendaFilter, Pageable pageable) {
+  public Page<AgendaDTO> Filtrar(AgendaFilter agendaFilter, Pageable pageable) {
 
 
     CriteriaBuilder builder = manager.getCriteriaBuilder();
-    CriteriaQuery<Agenda> criteria = builder.createQuery(Agenda.class);
+    CriteriaQuery<AgendaDTO> criteria = builder.createQuery(AgendaDTO.class);
     Root<Agenda> root = criteria.from(Agenda.class);
 
-    Predicate[] predicates = CriarRestricoes(agendaFilter, builder, root);
+    criteria.select(builder.construct(AnimalDTO.class
+      ,root.get("id")
+      ,root.get("datahoraconsulta")
+      ,root.get("medico").get("nomemedico")
+      ,root.get("medico").get("telefone")
+      ,root.get("consulta").get("datahora")
+      ,root.get("consulta").get("historico")
+      ,root.get("animal").get("nomeanimal")
+    ));
+    Predicate[] predicates =CriarRestricoes(agendaFilter, builder, root);
     criteria.where(predicates);
     criteria.orderBy(builder.asc(root.get("datahoraconsulta")));
 
-    TypedQuery<Agenda> query = manager.createQuery(criteria);
+    TypedQuery<AgendaDTO> query = manager.createQuery(criteria);
     adicionarRestricoesDePaginacao(query, pageable);
+
     return new PageImpl<>(query.getResultList(), pageable, total(agendaFilter));
 
-
   }
 
-
-  private Object total(AgendaFilter agendaFilter) {
-    CriteriaBuilder builder = manager.getCriteriaBuilder();
-    CriteriaQuery<Integer> criteria = builder.createQuery(Integer.class);
-    Root<Agenda> root = criteria.from(Agenda.class);
-
-    Predicate[] predicates = CriarRestricoes(agendaFilter, builder, root);
-    criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("datahoraconsulta")));
+  private Predicate[] CriarRestricoes(AgendaFilter agendaFilter, CriteriaBuilder builder, Root<Agenda> root) {
+    List<Predicate> predicates = new ArrayList<>();
 
 
-    return manager.createQuery(criteria).getResultList();
+    return predicates.toArray(new Predicate[predicates.size()]);
   }
+
 
   private void adicionarRestricoesDePaginacao(TypedQuery<Agenda> query, Pageable pageable) {
     int paginaAtual = pageable.getPageNumber();
@@ -63,12 +70,18 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
     query.setFirstResult(primeiroRegistrosPorPagina);
     query.setMaxResults(totalRegistrosPorDia);
   }
-  private Predicate[] CriarRestricoes(AgendaFilter agendaFilter, CriteriaBuilder builder, Root<Agenda> root) {
-    List<Predicate> predicates = new ArrayList<>();
+  private Long total(AgendaFilter agendaFilter) {
+    CriteriaBuilder builder = manager.getCriteriaBuilder();
+    CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+    Root<Agenda> root = criteria.from(Agenda.class);
 
+    Predicate[] predicates = CriarRestricoes(agendaFilter, builder, root);
+    criteria.where(predicates);
+    criteria.orderBy(builder.asc(root.get("datahoraconsulta")));
 
-    return predicates.toArray(new Predicate[predicates.size()]);
-    }
+    criteria.select(builder.count(root));
+
+    return manager.createQuery(criteria).getSingleResult();
 
 
 

@@ -11,7 +11,7 @@ public class Especie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String descricao;
+    private String descricaoEs;
 
     @OneToMany
     @JoinColumn (name = "idespecie")
@@ -26,13 +26,14 @@ public class Especie {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
+  public String getDescricaoEs() {
+    return descricaoEs;
+  }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+  public void setDescricaoEs(String descricaoEs) {
+    this.descricaoEs = descricaoEs;
+  }
+
 
   public List<Animal> getAnimaisespecie() {
     return animaisespecie;

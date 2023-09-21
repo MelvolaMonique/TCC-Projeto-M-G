@@ -12,7 +12,7 @@ public class Raca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String descricao;
+    private String descricaoRa;
 
     @OneToMany(mappedBy = "raca")
     private List<Animal> animaisraca = new ArrayList<>();
@@ -21,16 +21,15 @@ public class Raca {
         return id;
     }
 
-    public void setId(Integer id) {
+  public String getDescricaoRa() {
+    return descricaoRa;
+  }
+  public void setDescricaoRa(String descricaoRa) {
+    this.descricaoRa = descricaoRa;
+  }
+
+  public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
   public List<Animal> getAnimaisraca() {
