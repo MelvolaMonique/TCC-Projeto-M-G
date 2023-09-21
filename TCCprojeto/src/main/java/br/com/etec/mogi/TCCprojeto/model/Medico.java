@@ -12,7 +12,7 @@ public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
+    private String nomemedico;
     private String telefone;
     private String CPF;
     private String RG;
@@ -31,15 +31,15 @@ public class Medico {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
-    }
+  public String getNomemedico() {
+    return nomemedico;
+  }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+  public void setNomemedico(String nomemedico) {
+    this.nomemedico = nomemedico;
+  }
 
-    public String getTelefone() {
+  public String getTelefone() {
         return telefone;
     }
 

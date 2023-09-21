@@ -12,7 +12,7 @@ alter table cliente add constraint FK_cliente_cidade foreign key(idcidade) refer
 
 -- INSERT-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- INSERIR MEDICO
-insert into medico(id,nome, telefone, CPF,RG) values (1, 'Marcio','(14)99773-6147','905.550.860-89','30.896.574-7');
+insert into medico(id,nomemedico, telefone, CPF,RG) values (1, 'Marcio','(14)99773-6147','905.550.860-89','30.896.574-7');
 -- Inserir na tabela "agenda"
 insert into agenda(id,datahoraconsulta, idmedico) values (1,'2000-03-13', 1);
 -- insert cidade
