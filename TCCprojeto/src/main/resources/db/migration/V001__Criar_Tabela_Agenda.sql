@@ -1,5 +1,5 @@
 CREATE table agenda(
   id int not null primary key auto_increment,
-  datahoraconsulta DATE,
+  datahora DATE,
   idmedico int not null
 );

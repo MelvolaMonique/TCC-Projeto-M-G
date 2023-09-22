@@ -3,16 +3,16 @@ package br.com.etec.mogi.TCCprojeto.repository.filter;
 import java.util.Date;
 
 public class ConsultaFilter {
-  private Date datahora;
+  private Date datahoraconsulta;
   private String animal;
   private String nomemedico;
 
-  public Date getDatahora() {
-    return datahora;
+  public Date getDatahoraconsulta() {
+    return datahoraconsulta;
   }
 
-  public void setDatahora(Date datahora) {
-    this.datahora = datahora;
+  public void setDatahoraconsulta(Date datahoraconsulta) {
+    this.datahoraconsulta = datahoraconsulta;
   }
 
   public String getAnimal() {

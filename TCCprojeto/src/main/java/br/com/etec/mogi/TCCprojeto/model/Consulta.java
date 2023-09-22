@@ -12,7 +12,7 @@ public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date datahora;
+    private Date datahoraconsulta;
     private String historico;
 
     @ManyToOne
@@ -31,12 +31,12 @@ public class Consulta {
         this.id = id;
     }
 
-  public Date getDatahora() {
-    return datahora;
+  public Date getDatahoraconsulta() {
+    return datahoraconsulta;
   }
 
-  public void setDatahora(Date datahora) {
-    this.datahora = datahora;
+  public void setDatahoraconsulta(Date datahoraconsulta) {
+    this.datahoraconsulta = datahoraconsulta;
   }
 
   public Animal getAnimal() {

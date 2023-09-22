@@ -1,13 +1,13 @@
 package br.com.etec.mogi.TCCprojeto.repository.filter;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Date;
 
 public class AgendaFilter {
 
-  private Date datahoraconsulta;
+  private Date datahora;
   private String nomemedico;
+  private String telefone;
+
 
   public String getNomemedico() {
     return nomemedico;
@@ -17,11 +17,20 @@ public class AgendaFilter {
     this.nomemedico = nomemedico;
   }
 
-  public Date getDatahoraconsulta() {
-    return datahoraconsulta;
+  public Date getDatahora() {
+    return datahora;
   }
 
-  public void setDatahoraconsulta(Date datahoraconsulta) {
-    this.datahoraconsulta = datahoraconsulta;
+  public void setDatahora(Date datahora) {
+    this.datahora = datahora;
   }
+
+  public String getTelefone() {
+    return telefone;
+  }
+
+  public void setTelefone(String telefone) {
+    this.telefone = telefone;
+  }
+
 }

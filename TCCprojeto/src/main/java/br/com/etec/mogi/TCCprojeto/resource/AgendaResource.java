@@ -3,7 +3,11 @@ package br.com.etec.mogi.TCCprojeto.resource;
 
 import br.com.etec.mogi.TCCprojeto.model.Agenda;
 import br.com.etec.mogi.TCCprojeto.repository.AgendaRepository;
+import br.com.etec.mogi.TCCprojeto.repository.filter.AgendaFilter;
+import br.com.etec.mogi.TCCprojeto.repository.projections.AgendaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/agendas")
+@RequestMapping("/agenda")
 
-public class AgendaResource {
+public class
+AgendaResource {
 
   @Autowired
   private AgendaRepository agendaRepository;
@@ -22,4 +27,10 @@ public class AgendaResource {
   public List<Agenda> listartodosagendamentos(){
     return agendaRepository.findAll();
   }
+
+  @GetMapping()
+  public Page<AgendaDTO> pesquisar(AgendaFilter agendaFilter, Pageable pageable){
+    return agendaRepository.Filtrar(agendaFilter, pageable);
+  }
+
 }

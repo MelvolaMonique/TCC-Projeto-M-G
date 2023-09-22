@@ -14,17 +14,17 @@ alter table cliente add constraint FK_cliente_cidade foreign key(idcidade) refer
 -- INSERIR MEDICO
 insert into medico(id,nomemedico, telefone, CPF,RG) values (1, 'Marcio','(14)99773-6147','905.550.860-89','30.896.574-7');
 -- Inserir na tabela "agenda"
-insert into agenda(id,datahoraconsulta, idmedico) values (1,'2000-03-13', 1);
+insert into agenda(id,datahora, idmedico) values (1,'2000-03-13', 1);
 -- insert cidade
 insert into cidade(id, nomecidade, estado) values (1,'itatiba','SP');
 -- insert cliente
 insert into cliente(id,nomecliente,endereco, tele1, tele2, CPF, RG, idcidade) values(1,'Claúdia','rua josé bizerra 165', '(14)99685-7426','(14)98565-4585','125.369.258-54','28.145.956-4', 1);
 -- insert especie
-insert into especie(id, descricao) values (1, 'gato');
+insert into especie(id, descricaoEs) values (1, 'gato');
 -- inserir raca
-insert into raca(id, descricao) values (1,'siamês');
+insert into raca(id, descricaoRa) values (1,'siamês');
 -- insert Animal
 insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (1, 'alberto', '3','F','não',1,1,1);
 
 -- insert consulta
-insert into consulta(id, datahora,historico,idanimal,idmedico) values(1,'2000-03-13','animal com a pata quebrada', 1,1);
+insert into consulta(id, datahoraconsulta,historico,idanimal,idmedico) values(1,'2000-03-13','animal com a pata quebrada', 1,1);

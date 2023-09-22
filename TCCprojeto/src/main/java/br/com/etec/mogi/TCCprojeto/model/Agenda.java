@@ -10,7 +10,7 @@ public class Agenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date datahoraconsulta;
+    private Date datahora;
 
     @ManyToOne
     @JoinColumn(name = "idmedico")
@@ -24,12 +24,12 @@ public class Agenda {
         this.id = id;
     }
 
-  public Date getDatahoraconsulta() {
-    return datahoraconsulta;
+  public Date getDatahora() {
+    return datahora;
   }
 
-  public void setDatahoraconsulta(Date datahoraconsulta) {
-    this.datahoraconsulta = datahoraconsulta;
+  public void setDatahora(Date datahora) {
+    this.datahora = datahora;
   }
 
   public Medico getMedico() {
