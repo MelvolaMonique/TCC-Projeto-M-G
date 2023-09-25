@@ -1,5 +1,7 @@
 package br.com.etec.mogi.TCCprojeto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ public class Cidade {
     private String nomecidade;
     private String estado;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cidade")
     private List<Cliente> clientescidade = new ArrayList<>();
 

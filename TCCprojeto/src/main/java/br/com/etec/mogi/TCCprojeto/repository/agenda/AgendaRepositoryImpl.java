@@ -4,6 +4,7 @@ import br.com.etec.mogi.TCCprojeto.model.Agenda;
 import br.com.etec.mogi.TCCprojeto.repository.filter.AgendaFilter;
 import br.com.etec.mogi.TCCprojeto.repository.projections.AgendaDTO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 
@@ -50,6 +52,19 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 
   private Predicate[] CriarRestricoes(AgendaFilter agendaFilter, CriteriaBuilder builder, Root<Agenda> root) {
     List<Predicate> predicates = new ArrayList<>();
+
+    if(!StringUtils.isEmpty(agendaFilter.getNomemedico())) {
+      predicates.add(builder.like(builder.lower(root.get("nomemedico")),
+        "%" + agendaFilter.getNomemedico().toLowerCase() + "%"));
+    }
+    if (agendaFilter.getDatahora() != null){
+      predicates.add(builder.greaterThanOrEqualTo(root.get("datahora")),
+        agendaFilter.getDatahora());
+    }
+    if (!St)
+
+
+    }
 
 
     return predicates.toArray(new Predicate[predicates.size()]);

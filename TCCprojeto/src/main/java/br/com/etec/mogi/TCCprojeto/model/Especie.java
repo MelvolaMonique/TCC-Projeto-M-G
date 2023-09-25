@@ -1,5 +1,7 @@
 package br.com.etec.mogi.TCCprojeto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Especie {
     private Integer id;
     private String descricaoEs;
 
+    @JsonIgnore
     @OneToMany
     @JoinColumn (name = "idespecie")
     private List<Animal> animaisespecie = new ArrayList<>();

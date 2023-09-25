@@ -20,9 +20,9 @@ insert into cidade(id, nomecidade, estado) values (1,'itatiba','SP');
 -- insert cliente
 insert into cliente(id,nomecliente,endereco, tele1, tele2, CPF, RG, idcidade) values(1,'Claúdia','rua josé bizerra 165', '(14)99685-7426','(14)98565-4585','125.369.258-54','28.145.956-4', 1);
 -- insert especie
-insert into especie(id, descricaoEs) values (1, 'gato');
+insert into especie(id, descricao_es) values (1, 'gato');
 -- inserir raca
-insert into raca(id, descricaoRa) values (1,'siamês');
+insert into raca(id, descricao_ra) values (1,'siamês');
 -- insert Animal
 insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (1, 'alberto', '3','F','não',1,1,1);
 

@@ -1,6 +1,8 @@
 package br.com.etec.mogi.TCCprojeto.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +19,11 @@ public class Medico {
     private String CPF;
     private String RG;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "medico")
     private List<Consulta> consultasmedico = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "medico")
     private List<Agenda> agendamedico = new ArrayList<>();
 

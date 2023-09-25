@@ -1,5 +1,7 @@
 package br.com.etec.mogi.TCCprojeto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ public class Raca {
     private Integer id;
     private String descricaoRa;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "raca")
     private List<Animal> animaisraca = new ArrayList<>();
 
