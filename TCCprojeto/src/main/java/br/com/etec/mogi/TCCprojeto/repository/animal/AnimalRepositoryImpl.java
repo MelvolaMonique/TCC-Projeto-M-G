@@ -1,10 +1,10 @@
 package br.com.etec.mogi.TCCprojeto.repository.animal;
 
-import br.com.etec.mogi.TCCprojeto.model.Agenda;
 import br.com.etec.mogi.TCCprojeto.model.Animal;
 import br.com.etec.mogi.TCCprojeto.repository.filter.AnimalFilter;
-import br.com.etec.mogi.TCCprojeto.repository.projections.AgendaDTO;
+
 import br.com.etec.mogi.TCCprojeto.repository.projections.AnimalDTO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +16,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 public class AnimalRepositoryImpl implements AnimalRepositoryQuery  {
@@ -47,6 +50,49 @@ public class AnimalRepositoryImpl implements AnimalRepositoryQuery  {
   adicionarRestricoesDePaginacao(query, pageable);
 
   return new PageImpl<>(query.getResultList(), pageable, total(animalFilter));
+}
+  private Predicate[] CriarRestricoes(AnimalFilter animalFilter, CriteriaBuilder builder, Root<Animal> root) {
+    List<Predicate> predicates = new ArrayList<>();
+    if (!StringUtils.isEmpty(animalFilter.getNomeanimal())){
+      predicates.add(builder.like(builder.lower(root.get("nomeanimal")),
+              "%" + animalFilter.getNomeanimal().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getIdade())){
+      predicates.add(builder.like(builder.lower(root.get("idade")),
+      "%" + animalFilter.getIdade().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getSexo())){
+      predicates.add(builder.like(builder.lower(root.get("sexo")),
+              "%" + animalFilter.getSexo().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getCastracao())){
+      predicates.add(builder.like(builder.lower(root.get("castração")),
+              "%" + animalFilter.getCastracao().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getDescricaoRa())){
+      predicates.add(builder.equal(builder.lower(root.get("raca").get("descricãora")),
+              animalFilter.getDescricaoRa().toLowerCase()));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getDescricaoEs())){
+      predicates.add(builder.equal(builder.lower(root.get("especie").get("descricãoes")),
+              animalFilter.getDescricaoRa().toLowerCase()));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getNomecliente())){
+      predicates.add(builder.equal(builder.lower(root.get("cliente").get("nomecliente")),
+              animalFilter.getNomecliente().toLowerCase()));
+    }
+
+    return predicates.toArray(new Predicate[predicates.size()]);
+}
+
+  private void adicionarRestricoesDePaginacao(TypedQuery<AnimalDTO> query, Pageable pageable) {
+  int paginaAtual = pageable.getPageNumber();
+  int totalRegistrosPorDia = pageable.getPageSize();
+  int primeiroRegistrosPorPagina = paginaAtual * totalRegistrosPorDia;
+
+  query.setFirstResult(primeiroRegistrosPorPagina);
+  query.setMaxResults(totalRegistrosPorDia);
+
 }
 
   private Long total(AnimalFilter animalFilter) {

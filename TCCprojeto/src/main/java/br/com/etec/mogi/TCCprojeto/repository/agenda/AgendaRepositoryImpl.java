@@ -61,8 +61,9 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
       predicates.add(builder.greaterThanOrEqualTo(root.get("datahora")),
         agendaFilter.getDatahora());
     }
-    if (!St)
-
+    if (!StringUtils.isEmpty(agendaFilter.getTelefone())){
+      predicates.add(builder.like(builder.lower(root.get("telefone")),
+              "%" + agendaFilter.getTelefone().toLowerCase() + "%"));
 
     }
 

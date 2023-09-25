@@ -7,8 +7,8 @@ public class AnimalFilter {
   private String idade;
   private String sexo;
   private String castracao;
-  private String raca;
-  private String especie;
+  private String descricaoRa;
+  private String descricaoEs;
 
   public String getNomeanimal() {
     return nomeanimal;
@@ -50,19 +50,19 @@ public class AnimalFilter {
     this.idade = idade;
   }
 
-  public String getRaca() {
-    return raca;
+  public String getDescricaoRa() {
+    return descricaoRa;
   }
 
-  public void setRaca(String raca) {
-    this.raca = raca;
+  public void setDescricaoRa(String descricaoRa) {
+    this.descricaoRa = descricaoRa;
   }
 
-  public String getEspecie() {
-    return especie;
+  public String getDescricaoEs() {
+    return descricaoEs;
   }
 
-  public void setEspecie(String especie) {
-    this.especie = especie;
+  public void setDescricaoEs(String descricaoEs) {
+    this.descricaoEs = descricaoEs;
   }
 }
