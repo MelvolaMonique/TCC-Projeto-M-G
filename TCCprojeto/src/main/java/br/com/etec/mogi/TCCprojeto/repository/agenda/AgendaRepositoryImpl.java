@@ -18,7 +18,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 
 public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 
@@ -28,20 +28,21 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
   @Override
   public Page<AgendaDTO> Filtrar(AgendaFilter agendaFilter, Pageable pageable) {
 
-
     CriteriaBuilder builder = manager.getCriteriaBuilder();
     CriteriaQuery<AgendaDTO> criteria = builder.createQuery(AgendaDTO.class);
     Root<Agenda> root = criteria.from(Agenda.class);
 
     criteria.select(builder.construct(AgendaDTO.class
       ,root.get("id")
-      ,root.get("datahora")
+      ,root.get("consulta").get("datahoraconsulta")
       ,root.get("medico").get("nomemedico")
       ,root.get("medico").get("telefone")
+      ,root.get("consulta").get("animal").get("nomeanimal")
+      ,root.get("consulta").get("cliente").get("nomecliente")
     ));
     Predicate[] predicates =CriarRestricoes(agendaFilter, builder, root);
     criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("datahora")));
+    criteria.orderBy(builder.asc(root.get("datahoraconsulta")));
 
     TypedQuery<AgendaDTO> query = manager.createQuery(criteria);
     adicionarRestricoesDePaginacao(query, pageable);
@@ -53,18 +54,25 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
   private Predicate[] CriarRestricoes(AgendaFilter agendaFilter, CriteriaBuilder builder, Root<Agenda> root) {
     List<Predicate> predicates = new ArrayList<>();
 
-    if(!StringUtils.isEmpty(agendaFilter.getNomemedico())) {
-      predicates.add(builder.like(builder.lower(root.get("nomemedico")),
-        "%" + agendaFilter.getNomemedico().toLowerCase() + "%"));
+    if (agendaFilter.getDatahoraconsulta() != null){
+      predicates.add(builder.greaterThanOrEqualTo(root.get("datahoraconsulta"),
+        agendaFilter.getDatahoraconsulta()));
     }
-    if (agendaFilter.getDatahora() != null){
-      predicates.add(builder.greaterThanOrEqualTo(root.get("datahora")),
-        agendaFilter.getDatahora());
+    if(!StringUtils.isEmpty(agendaFilter.getNomemedico())) {
+      predicates.add(builder.like(builder.lower(root.get("medico").get("nomemedico")),
+        "%" + agendaFilter.getTelefone().toLowerCase() + "%"));
     }
     if (!StringUtils.isEmpty(agendaFilter.getTelefone())){
-      predicates.add(builder.like(builder.lower(root.get("telefone")),
-              "%" + agendaFilter.getTelefone().toLowerCase() + "%"));
-
+      predicates.add(builder.like(builder.lower(root.get("medico").get("telefone")),
+        agendaFilter.getTelefone()));
+    }
+    if (!StringUtils.isEmpty(agendaFilter.getNomeanimal())){
+      predicates.add(builder.like(builder.lower(root.get("consulta").get("animal").get("nomeanimal")),
+        "%" + agendaFilter.getNomeanimal().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(agendaFilter.getNomecliente())){
+      predicates.add(builder.like(builder.lower(root.get("consulta").get("cliente").get("nomecliente")),
+        "%" + agendaFilter.getNomecliente().toLowerCase() + "%"));
     }
 
 

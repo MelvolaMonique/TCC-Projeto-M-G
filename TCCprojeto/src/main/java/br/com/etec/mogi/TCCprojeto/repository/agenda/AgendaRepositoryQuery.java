@@ -1,6 +1,5 @@
 package br.com.etec.mogi.TCCprojeto.repository.agenda;
 
-import br.com.etec.mogi.TCCprojeto.model.Agenda;
 import br.com.etec.mogi.TCCprojeto.repository.filter.AgendaFilter;
 import br.com.etec.mogi.TCCprojeto.repository.projections.AgendaDTO;
 import org.springframework.data.domain.Page;

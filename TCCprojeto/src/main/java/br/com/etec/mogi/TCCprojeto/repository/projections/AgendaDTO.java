@@ -7,18 +7,16 @@ public class AgendaDTO {
   private Date datahoraconsulta;
   private String nomemedico;
   private String telefone;
-  private Date datahora;
-  private String historico;
   private String nomeanimal;
+  private String nomecliente;
 
-  public AgendaDTO(Integer id, Date datahoraconsulta, String nomemedico, String telefone, Date datahora, String historico, String nomeanimal) {
+  public AgendaDTO(Integer id, Date datahoraconsulta, String nomemedico, String telefone, String nomeanimal, String nomecliente) {
     this.id = id;
     this.datahoraconsulta = datahoraconsulta;
     this.nomemedico = nomemedico;
     this.telefone = telefone;
-    this.datahora = datahora;
-    this.historico = historico;
     this.nomeanimal = nomeanimal;
+    this.nomecliente = nomecliente;
   }
 
   public Integer getId() {
@@ -53,27 +51,19 @@ public class AgendaDTO {
     this.telefone = telefone;
   }
 
-  public Date getDatahora() {
-    return datahora;
-  }
-
-  public void setDatahora(Date datahora) {
-    this.datahora = datahora;
-  }
-
-  public String getHistorico() {
-    return historico;
-  }
-
-  public void setHistorico(String historico) {
-    this.historico = historico;
-  }
-
   public String getNomeanimal() {
     return nomeanimal;
   }
 
   public void setNomeanimal(String nomeanimal) {
     this.nomeanimal = nomeanimal;
+  }
+
+  public String getNomecliente() {
+    return nomecliente;
+  }
+
+  public void setNomecliente(String nomecliente) {
+    this.nomecliente = nomecliente;
   }
 }

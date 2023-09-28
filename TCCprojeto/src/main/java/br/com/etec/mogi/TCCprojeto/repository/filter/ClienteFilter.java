@@ -4,6 +4,15 @@ public class ClienteFilter {
   private String nomecliente;
   private String endereco;
   private String nomeanimal;
+  private String nomecidade;
+
+  public String getNomecidade() {
+    return nomecidade;
+  }
+
+  public void setNomecidade(String nomecidade) {
+    this.nomecidade = nomecidade;
+  }
 
   public String getNomecliente() {
     return nomecliente;
