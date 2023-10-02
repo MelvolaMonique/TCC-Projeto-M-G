@@ -94,7 +94,6 @@ public class AnimalRepositoryImpl implements AnimalRepositoryQuery  {
   query.setMaxResults(totalRegistrosPorDia);
 
 }
-
   private Long total(AnimalFilter animalFilter) {
   CriteriaBuilder builder = manager.getCriteriaBuilder();
   CriteriaQuery<Long> criteria = builder.createQuery(Long.class);

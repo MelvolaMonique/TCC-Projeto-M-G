@@ -45,9 +45,7 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery {
     adicionarRestricoesDePaginacao(query, pageable);
 
     return new PageImpl<>(query.getResultList(), pageable, total(clienteFilter));
-
   }
-
   private Predicate[] CriarRestricoes(ClienteFilter clienteFilter, CriteriaBuilder builder, Root<Cliente> root) {
     List<Predicate> predicates = new ArrayList<>();
 
@@ -55,19 +53,19 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery {
       predicates.add(builder.like(builder.lower(root.get("nomecliente")),
         "%" + clienteFilter.getNomecliente().toLowerCase() + "%"));
     }
+
+    if (!StringUtils.isEmpty(clienteFilter.getEndereco())){
+      predicates.add(builder.like(builder.lower(root.get("endereco")),
+        "%" + clienteFilter.getEndereco().toLowerCase()+ "%"));
+    }
+    if (!StringUtils.isEmpty(clienteFilter.getEndereco())){
+      predicates.add(builder.like(builder.lower(root.get("cidade").get("nomecidade")),
+        clienteFilter.getNomecliente().toLowerCase()));
+    }
     if (!StringUtils.isEmpty(clienteFilter.getNomeanimal())){
       predicates.add(builder.like(builder.lower(root.get("animal").get("nomeanimal")),
         clienteFilter.getNomeanimal().toLowerCase()));
     }
-    if (!StringUtils.isEmpty(clienteFilter.getEndereco())){
-      predicates.add(builder.like(builder.lower(root.get("endereco")),
-        "%" + clienteFilter.getEndereco().toLowerCase()+ "%"));
-    }
-    if (!StringUtils.isEmpty(clienteFilter.getEndereco())){
-      predicates.add(builder.like(builder.lower(root.get("endereco")),
-        "%" + clienteFilter.getEndereco().toLowerCase()+ "%"));
-    }
-
     return predicates.toArray(new Predicate[predicates.size()]);
   }
 
