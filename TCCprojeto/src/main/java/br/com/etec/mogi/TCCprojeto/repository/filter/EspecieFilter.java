@@ -2,22 +2,13 @@ package br.com.etec.mogi.TCCprojeto.repository.filter;
 
 public class EspecieFilter {
 
-  private String descricao;
-  private String nomeanimal;
+  private String descricaoEs;
 
-  public String getDescricao() {
-    return descricao;
+  public String getDescricaoEs() {
+    return descricaoEs;
   }
 
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
-  }
-
-  public String getNomeanimal() {
-    return nomeanimal;
-  }
-
-  public void setNomeanimal(String nomeanimal) {
-    this.nomeanimal = nomeanimal;
+  public void setDescricaoEs(String descricaoEs) {
+    this.descricaoEs = descricaoEs;
   }
 }

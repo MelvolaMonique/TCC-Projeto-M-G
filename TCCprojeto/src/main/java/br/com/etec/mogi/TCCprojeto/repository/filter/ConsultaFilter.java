@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class ConsultaFilter {
   private Date datahoraconsulta;
-  private String animal;
+  private String historico;
+  private String nomeanimal;
   private String nomemedico;
 
   public Date getDatahoraconsulta() {
@@ -15,12 +16,20 @@ public class ConsultaFilter {
     this.datahoraconsulta = datahoraconsulta;
   }
 
-  public String getAnimal() {
-    return animal;
+  public String getHistorico() {
+    return historico;
   }
 
-  public void setAnimal(String animal) {
-    this.animal = animal;
+  public void setHistorico(String historico) {
+    this.historico = historico;
+  }
+
+  public String getNomeanimal() {
+    return nomeanimal;
+  }
+
+  public void setNomeanimal(String nomeanimal) {
+    this.nomeanimal = nomeanimal;
   }
 
   public String getNomemedico() {

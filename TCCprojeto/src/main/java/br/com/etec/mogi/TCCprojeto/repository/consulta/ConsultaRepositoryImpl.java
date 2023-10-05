@@ -37,7 +37,7 @@ public class ConsultaRepositoryImpl implements  ConsultaRepositoryQuery{
       ,root.get("animal").get("nomeanimal")
       ,root.get("medico").get("nomemedico")
     ));
-    Predicate[] predicates =CriarRestricoes(consultaFilter, builder, root);
+    Predicate[] predicates = criarRestricoes(consultaFilter, builder, root);
     criteria.where(predicates);
     criteria.orderBy(builder.asc(root.get("datahoraconsulta")));
 
@@ -47,7 +47,7 @@ public class ConsultaRepositoryImpl implements  ConsultaRepositoryQuery{
     return new PageImpl<>(query.getResultList(), pageable, total(consultaFilter));
   }
 
-  private Predicate[] CriarRestricoes(ConsultaFilter consultaFilter, CriteriaBuilder builder, Root<Consulta> root) {
+  private Predicate[] criarRestricoes(ConsultaFilter consultaFilter, CriteriaBuilder builder, Root<Consulta> root) {
     List<Predicate> predicates = new ArrayList<>();
 
     if (consultaFilter.getDatahoraconsulta() != null) {
@@ -55,12 +55,16 @@ public class ConsultaRepositoryImpl implements  ConsultaRepositoryQuery{
         consultaFilter.getDatahoraconsulta()));
 
     }
-    if(!StringUtils.isEmpty(consultaFilter.get())) {
-      predicates.add(builder.like(builder.lower(root.get("medico").get("nomemedico")),
+    if(!StringUtils.isEmpty(consultaFilter.getHistorico())) {
+      predicates.add(builder.like(builder.lower(root.get("historico")),
         "%" + consultaFilter.getNomemedico().toLowerCase() + "%"));
     }
 
-    if(!StringUtils.isEmpty(consultaFilter.getNomemedico())) {
+    if(!StringUtils.isEmpty(consultaFilter.getNomeanimal())) {
+      predicates.add(builder.like(builder.lower(root.get("animal").get("nomeanimal")),
+        "%" + consultaFilter.getNomemedico().toLowerCase() + "%"));
+    }
+    if(!StringUtils.isEmpty(consultaFilter.getNomeanimal())) {
       predicates.add(builder.like(builder.lower(root.get("medico").get("nomemedico")),
         "%" + consultaFilter.getNomemedico().toLowerCase() + "%"));
     }
@@ -80,7 +84,7 @@ public class ConsultaRepositoryImpl implements  ConsultaRepositoryQuery{
     CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
     Root<Consulta> root = criteria.from(Consulta.class);
 
-    Predicate[] predicates = CriarRestricoes(consultaFilter, builder, root);
+    Predicate[] predicates = criarRestricoes(consultaFilter, builder, root);
     criteria.where(predicates);
     criteria.orderBy(builder.asc(root.get("datahoraconsulta")));
 
