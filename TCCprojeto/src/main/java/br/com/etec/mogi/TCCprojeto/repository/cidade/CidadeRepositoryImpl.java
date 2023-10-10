@@ -1,9 +1,8 @@
 package br.com.etec.mogi.TCCprojeto.repository.cidade;
 
-import br.com.etec.mogi.TCCprojeto.model.Animal;
 import br.com.etec.mogi.TCCprojeto.model.Cidade;
 import br.com.etec.mogi.TCCprojeto.repository.filter.CidadeFilter;
-import br.com.etec.mogi.TCCprojeto.repository.projections.AnimalDTO;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

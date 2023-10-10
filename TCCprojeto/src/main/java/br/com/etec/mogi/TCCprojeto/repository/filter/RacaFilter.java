@@ -1,15 +1,15 @@
 package br.com.etec.mogi.TCCprojeto.repository.filter;
 
 public class RacaFilter {
-private String descricao;
+private String descricaoRa;
 private String nomeanimal;
 
-  public String getDescricao() {
-    return descricao;
+  public String getDescricaoRa() {
+    return descricaoRa;
   }
 
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
+  public void setDescricaoRa(String descricaoRa) {
+    this.descricaoRa = descricaoRa;
   }
 
   public String getNomeanimal() {

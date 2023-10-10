@@ -35,7 +35,7 @@ public class MedicoRepositoryImpl implements MedicoRepositoryQuery {
       ,root.get("nomemedico")
       ,root.get("consulta").get("datahoraconsulta")
       ,root.get("consulta").get("animal").get("nomeanimal")
-      ,root.get("consulta").get("animal").get("especie").get("descricaoEs"
+      ,root.get("consulta").get("animal").get("especie").get("descricaoEs")
       ));
     Predicate[] predicates = criarRestricoes(medicoFilter, builder, root);
     criteria.where(predicates);
@@ -59,8 +59,15 @@ public class MedicoRepositoryImpl implements MedicoRepositoryQuery {
       predicates.add(builder.greaterThanOrEqualTo(root.get("consulta").get("datahoraconsulta"),
         medicoFilter.getDatahoraconsulta()));
     }
-
-
+    if (!StringUtils.isEmpty(medicoFilter.getNomeanimal())) {
+       predicates.add(builder.like(builder.lower(root.get("consulta").get("animal").get("nomeanimal")),
+         "%" + medicoFilter.getNomeanimal().toLowerCase()+ "%"));
+    }
+    if (!StringUtils.isEmpty(medicoFilter.getDescricaoEs())) {
+      predicates.add(builder.like(builder.lower(root.get("consulta").get("animal").get("especie").get("descrisaoEs")),
+        "%" + medicoFilter.getNomeanimal().toLowerCase()+ "%"));
+    }
+ return  predicates.toArray(new Predicate[predicates.size()]);
   }
 
   private void adicionarRestricoesDePaginacao(TypedQuery<MedicoDTO> query, Pageable pageable) {

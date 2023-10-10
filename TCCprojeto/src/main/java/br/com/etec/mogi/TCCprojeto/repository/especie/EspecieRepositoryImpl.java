@@ -31,7 +31,7 @@ public class EspecieRepositoryImpl implements EspecieRepositoryQuery{
 
     Predicate[] predicates = CriarRestricoes(especieFilter, builder, root);
     criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("descricaoES")));
+    criteria.orderBy(builder.asc(root.get("descricaoEs")));
 
     TypedQuery<Especie> query = manager.createQuery(criteria);
     adicionarRestricoesDePaginacao(query, pageable);
@@ -45,7 +45,7 @@ public class EspecieRepositoryImpl implements EspecieRepositoryQuery{
 
     Predicate[] predicates = CriarRestricoes(especieFilter, builder, root);
     criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("descricao")));
+    criteria.orderBy(builder.asc(root.get("descricaoEs")));
 
     criteria.select(builder.count(root));
 
@@ -65,7 +65,7 @@ public class EspecieRepositoryImpl implements EspecieRepositoryQuery{
     List<Predicate> predicates = new ArrayList<>();
 
     if (!StringUtils.isEmpty(especieFilter.getDescricaoEs())){
-      predicates.add(builder.like(builder.lower(root.get("descricao")),
+      predicates.add(builder.like(builder.lower(root.get("descricaoEs")),
         "%" + especieFilter.getDescricaoEs().toLowerCase() + "%"));
     }
 return predicates.toArray(new Predicate[predicates.size()]);
