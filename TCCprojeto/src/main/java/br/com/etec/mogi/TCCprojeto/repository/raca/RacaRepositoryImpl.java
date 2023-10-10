@@ -15,7 +15,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,16 +39,13 @@ public class RacaRepositoryImpl implements RacaRepositoryQuery{
   }
 
   private Predicate[] CriarRestricoes(RacaFilter racaFilter, CriteriaBuilder builder, Root<Raca> root) {
-    List<Predicates> predicates = new ArrayList<>();
+    List<Predicate> predicates = new ArrayList<>();
 
-    if (!StringUtils.isEmpty(racaFilter.getDescricaoRa())){
-      predicates.add((builder.like(builder.lower(root.get("descricaoRa")),
-        "%" + racaFilter.getDescricaoRa().toLowerCase() + "%"));
+    if (!StringUtils.isEmpty(racaFilter.getDescricaoRa())) {
+      predicates.add(builder.like(builder.lower(root.get("descricaoRa")),
+        "%" + racaFilter.getDescricaoRa().toLowerCase()+ "%"));
     }
-    if (!StringUtils.isEmpty(racaFilter.getNomeanimal())){
-      predicates.add((builder.like(builder.lower(root.get("nomeanimal")),
-        "%" + racaFilter.getNomeanimal().toLowerCase() + "%"));
-    }
+
     return predicates.toArray(new Predicate[predicates.size()]);
   }
 
