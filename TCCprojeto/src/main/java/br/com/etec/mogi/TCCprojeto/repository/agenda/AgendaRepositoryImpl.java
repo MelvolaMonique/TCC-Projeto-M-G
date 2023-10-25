@@ -34,11 +34,11 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 
     criteria.select(builder.construct(AgendaDTO.class
       ,root.get("id")
-      ,root.get("consulta").get("datahoraconsulta")
       ,root.get("medico").get("nomemedico")
       ,root.get("medico").get("telefone")
-      ,root.get("consulta").get("animal").get("nomeanimal")
-      ,root.get("consulta").get("cliente").get("nomecliente")
+      ,root.get("medico").get("consulta").get("animal").get("nomeanimal")
+      ,root.get("medico").get("consulta").get("animal").get("cliente").get("nomecliente")
+      ,root.get("medico").get("consulta").get("datahoraconsulta")
     ));
     Predicate[] predicates =CriarRestricoes(agendaFilter, builder, root);
     criteria.where(predicates);
