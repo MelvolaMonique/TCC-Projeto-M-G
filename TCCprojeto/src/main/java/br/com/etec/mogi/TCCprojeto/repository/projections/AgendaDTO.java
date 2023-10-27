@@ -4,19 +4,15 @@ import java.util.Date;
 
 public class AgendaDTO {
   private Integer id;
-  private Date datahoraconsulta;
   private String nomemedico;
   private String telefone;
-  private String nomeanimal;
-  private String nomecliente;
+  private Date datahora;
 
-  public AgendaDTO(Integer id, Date datahoraconsulta, String nomemedico, String telefone, String nomeanimal, String nomecliente) {
+  public AgendaDTO(Integer id, String nomemedico, String telefone, Date datahora) {
     this.id = id;
-    this.datahoraconsulta = datahoraconsulta;
     this.nomemedico = nomemedico;
     this.telefone = telefone;
-    this.nomeanimal = nomeanimal;
-    this.nomecliente = nomecliente;
+    this.datahora = datahora;
   }
 
   public Integer getId() {
@@ -25,14 +21,6 @@ public class AgendaDTO {
 
   public void setId(Integer id) {
     this.id = id;
-  }
-
-  public Date getDatahoraconsulta() {
-    return datahoraconsulta;
-  }
-
-  public void setDatahoraconsulta(Date datahoraconsulta) {
-    this.datahoraconsulta = datahoraconsulta;
   }
 
   public String getNomemedico() {
@@ -51,19 +39,11 @@ public class AgendaDTO {
     this.telefone = telefone;
   }
 
-  public String getNomeanimal() {
-    return nomeanimal;
+  public Date getDatahora() {
+    return datahora;
   }
 
-  public void setNomeanimal(String nomeanimal) {
-    this.nomeanimal = nomeanimal;
-  }
-
-  public String getNomecliente() {
-    return nomecliente;
-  }
-
-  public void setNomecliente(String nomecliente) {
-    this.nomecliente = nomecliente;
+  public void setDatahora(Date datahora) {
+    this.datahora = datahora;
   }
 }

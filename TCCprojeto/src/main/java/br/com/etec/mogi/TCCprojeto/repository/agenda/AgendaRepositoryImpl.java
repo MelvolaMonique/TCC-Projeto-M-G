@@ -36,49 +36,17 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
       ,root.get("id")
       ,root.get("medico").get("nomemedico")
       ,root.get("medico").get("telefone")
-      ,root.get("medico").get("consulta").get("animal").get("nomeanimal")
-      ,root.get("medico").get("consulta").get("animal").get("cliente").get("nomecliente")
-      ,root.get("medico").get("consulta").get("datahoraconsulta")
+      ,root.get("datahora")
     ));
     Predicate[] predicates =CriarRestricoes(agendaFilter, builder, root);
     criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("datahoraconsulta")));
+    criteria.orderBy(builder.asc(root.get("datahora")));
 
     TypedQuery<AgendaDTO> query = manager.createQuery(criteria);
     adicionarRestricoesDePaginacao(query, pageable);
 
     return new PageImpl<>(query.getResultList(), pageable, total(agendaFilter));
-
   }
-
-  private Predicate[] CriarRestricoes(AgendaFilter agendaFilter, CriteriaBuilder builder, Root<Agenda> root) {
-    List<Predicate> predicates = new ArrayList<>();
-
-    if (agendaFilter.getDatahoraconsulta() != null){
-      predicates.add(builder.greaterThanOrEqualTo(root.get("datahoraconsulta"),
-        agendaFilter.getDatahoraconsulta()));
-    }
-    if(!StringUtils.isEmpty(agendaFilter.getNomemedico())) {
-      predicates.add(builder.like(builder.lower(root.get("medico").get("nomemedico")),
-        "%" + agendaFilter.getTelefone().toLowerCase() + "%"));
-    }
-    if (!StringUtils.isEmpty(agendaFilter.getTelefone())){
-      predicates.add(builder.like(builder.lower(root.get("medico").get("telefone")),
-        agendaFilter.getTelefone()));
-    }
-    if (!StringUtils.isEmpty(agendaFilter.getNomeanimal())){
-      predicates.add(builder.like(builder.lower(root.get("consulta").get("animal").get("nomeanimal")),
-        "%" + agendaFilter.getNomeanimal().toLowerCase() + "%"));
-    }
-    if (!StringUtils.isEmpty(agendaFilter.getNomecliente())){
-      predicates.add(builder.like(builder.lower(root.get("consulta").get("cliente").get("nomecliente")),
-        "%" + agendaFilter.getNomecliente().toLowerCase() + "%"));
-    }
-
-
-    return predicates.toArray(new Predicate[predicates.size()]);
-  }
-
 
   private void adicionarRestricoesDePaginacao(TypedQuery<AgendaDTO> query, Pageable pageable) {
     int paginaAtual = pageable.getPageNumber();
@@ -95,12 +63,31 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 
     Predicate[] predicates = CriarRestricoes(agendaFilter, builder, root);
     criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("datahoraconsulta")));
+    criteria.orderBy(builder.asc(root.get("datahora")));
 
     criteria.select(builder.count(root));
 
     return manager.createQuery(criteria).getSingleResult();
 
+  }
+  private Predicate[] CriarRestricoes(AgendaFilter agendaFilter, CriteriaBuilder builder, Root<Agenda> root) {
+    List<Predicate> predicates = new ArrayList<>();
+
+    if(!StringUtils.isEmpty(agendaFilter.getNomemedico())) {
+      predicates.add(builder.like(builder.lower(root.get("medico").get("nomemedico")),
+        "%" + agendaFilter.getTelefone().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(agendaFilter.getTelefone())){
+      predicates.add(builder.like(builder.lower(root.get("medico").get("telefone")),
+        agendaFilter.getTelefone()));
+    }
+    if (agendaFilter.getDatahora() != null){
+      predicates.add(builder.greaterThanOrEqualTo(root.get("datahora"),
+        agendaFilter.getDatahora()));
+    }
+
+
+    return predicates.toArray(new Predicate[predicates.size()]);
   }
   }
 

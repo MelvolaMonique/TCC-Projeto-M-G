@@ -35,7 +35,7 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery {
       ,root.get("nomecliente")
       ,root.get("endereco")
       ,root.get("cidade").get("nomecidade")
-      ,root.get("animal").get("nomeanimal")
+
     ));
     Predicate[] predicates =CriarRestricoes(clienteFilter, builder, root);
     criteria.where(predicates);
@@ -46,6 +46,29 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery {
 
     return new PageImpl<>(query.getResultList(), pageable, total(clienteFilter));
   }
+  private Long total(ClienteFilter clienteFilter) {
+    CriteriaBuilder builder = manager.getCriteriaBuilder();
+    CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+    Root<Cliente> root = criteria.from(Cliente.class);
+
+    Predicate[] predicates = CriarRestricoes(clienteFilter, builder, root);
+    criteria.where(predicates);
+    criteria.orderBy(builder.asc(root.get("nomecliente")));
+
+    criteria.select(builder.count(root));
+
+    return manager.createQuery(criteria).getSingleResult();
+  }
+  private void adicionarRestricoesDePaginacao(TypedQuery<ClienteDTO> query, Pageable pageable) {
+    int paginaAtual = pageable.getPageNumber();
+    int totalRegistrosPorDia = pageable.getPageSize();
+    int primeiroRegistrosPorPagina = paginaAtual * totalRegistrosPorDia;
+
+    query.setFirstResult(primeiroRegistrosPorPagina);
+    query.setMaxResults(totalRegistrosPorDia);
+  }
+
+
   private Predicate[] CriarRestricoes(ClienteFilter clienteFilter, CriteriaBuilder builder, Root<Cliente> root) {
     List<Predicate> predicates = new ArrayList<>();
 
@@ -62,35 +85,8 @@ public class ClienteRepositoryImpl implements ClienteRepositoryQuery {
       predicates.add(builder.like(builder.lower(root.get("cidade").get("nomecidade")),
         clienteFilter.getNomecliente().toLowerCase()));
     }
-    if (!StringUtils.isEmpty(clienteFilter.getNomeanimal())){
-      predicates.add(builder.like(builder.lower(root.get("animal").get("nomeanimal")),
-        clienteFilter.getNomeanimal().toLowerCase()));
-    }
+
     return predicates.toArray(new Predicate[predicates.size()]);
   }
-
-  private void adicionarRestricoesDePaginacao(TypedQuery<ClienteDTO> query, Pageable pageable) {
-    int paginaAtual = pageable.getPageNumber();
-    int totalRegistrosPorDia = pageable.getPageSize();
-    int primeiroRegistrosPorPagina = paginaAtual * totalRegistrosPorDia;
-
-    query.setFirstResult(primeiroRegistrosPorPagina);
-    query.setMaxResults(totalRegistrosPorDia);
-  }
-
-  private Long total(ClienteFilter clienteFilter) {
-    CriteriaBuilder builder = manager.getCriteriaBuilder();
-    CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
-    Root<Cliente> root = criteria.from(Cliente.class);
-
-    Predicate[] predicates = CriarRestricoes(clienteFilter, builder, root);
-    criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("nomecliente")));
-
-    criteria.select(builder.count(root));
-
-    return manager.createQuery(criteria).getSingleResult();
-  }
-
 
 }
