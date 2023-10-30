@@ -42,8 +42,8 @@ insert into raca(id, descricao_ra) values (1,'siamês');
 insert into raca(id, descricao_ra) values (2,'husky siberiano');
 insert into raca(id, descricao_ra) values (3,'arara azul');
 -- insert Animal
-insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (1, 'alberto', '3','F','não',1,1,1);
-insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (2, 'lidia', '1','M','sim',3,2,2);
+insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (1, 'lidia', '3','F','não',1,1,1);
+insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (2, 'alberto', '1','M','sim',3,2,2);
 insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (3, 'popoco', '2','F','não',2,3,3);
 -- insert consulta
 insert into consulta(id, datahoraconsulta,historico,idanimal,idmedico) values(1,'2000-03-13','animal com a pata quebrada', 1,1);

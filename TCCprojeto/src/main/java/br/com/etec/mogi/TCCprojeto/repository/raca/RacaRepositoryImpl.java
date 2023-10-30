@@ -38,17 +38,6 @@ public class RacaRepositoryImpl implements RacaRepositoryQuery{
     return new PageImpl<>(query.getResultList(), pageable, total(racaFilter));
   }
 
-  private Predicate[] CriarRestricoes(RacaFilter racaFilter, CriteriaBuilder builder, Root<Raca> root) {
-    List<Predicate> predicates = new ArrayList<>();
-
-    if (!StringUtils.isEmpty(racaFilter.getDescricaoRa())) {
-      predicates.add(builder.like(builder.lower(root.get("descricaoRa")),
-        "%" + racaFilter.getDescricaoRa().toLowerCase()+ "%"));
-    }
-
-    return predicates.toArray(new Predicate[predicates.size()]);
-  }
-
   private void adicionarRestricoesDePaginacao(TypedQuery<Raca> query, Pageable pageable) {
     int paginaAtual = pageable.getPageNumber();
     int totalRegistrosPorDia = pageable.getPageSize();
@@ -65,11 +54,20 @@ public class RacaRepositoryImpl implements RacaRepositoryQuery{
 
     Predicate[] predicates = CriarRestricoes(racaFilter, builder, root);
     criteria.where(predicates);
-    criteria.orderBy(builder.asc(root.get("DescricaoRa")));
+    criteria.orderBy(builder.asc(root.get("descricaoRa")));
 
     criteria.select(builder.count(root));
 
     return  manager.createQuery(criteria). getSingleResult();
   }
+  private Predicate[] CriarRestricoes(RacaFilter racaFilter, CriteriaBuilder builder, Root<Raca> root) {
+    List<Predicate> predicates = new ArrayList<>();
 
+    if (!StringUtils.isEmpty(racaFilter.getDescricaoRa())) {
+      predicates.add(builder.like(builder.lower(root.get("descricaoRa")),
+        "%" + racaFilter.getDescricaoRa().toLowerCase()+ "%"));
+    }
+
+    return predicates.toArray(new Predicate[predicates.size()]);
+  }
 }

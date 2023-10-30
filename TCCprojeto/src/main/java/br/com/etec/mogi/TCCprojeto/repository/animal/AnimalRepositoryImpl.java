@@ -51,39 +51,6 @@ public class AnimalRepositoryImpl implements AnimalRepositoryQuery  {
 
   return new PageImpl<>(query.getResultList(), pageable, total(animalFilter));
 }
-  private Predicate[] CriarRestricoes(AnimalFilter animalFilter, CriteriaBuilder builder, Root<Animal> root) {
-    List<Predicate> predicates = new ArrayList<>();
-    if (!StringUtils.isEmpty(animalFilter.getNomeanimal())){
-      predicates.add(builder.like(builder.lower(root.get("nomeanimal")),
-              "%" + animalFilter.getNomeanimal().toLowerCase() + "%"));
-    }
-    if (!StringUtils.isEmpty(animalFilter.getIdade())){
-      predicates.add(builder.like(builder.lower(root.get("idade")),
-      "%" + animalFilter.getIdade().toLowerCase() + "%"));
-    }
-    if (!StringUtils.isEmpty(animalFilter.getSexo())){
-      predicates.add(builder.like(builder.lower(root.get("sexo")),
-              "%" + animalFilter.getSexo().toLowerCase() + "%"));
-    }
-    if (!StringUtils.isEmpty(animalFilter.getCastracao())){
-      predicates.add(builder.like(builder.lower(root.get("castração")),
-              "%" + animalFilter.getCastracao().toLowerCase() + "%"));
-    }
-    if (!StringUtils.isEmpty(animalFilter.getDescricaoRa())){
-      predicates.add(builder.equal(builder.lower(root.get("raca").get("descricãora")),
-              animalFilter.getDescricaoRa().toLowerCase()));
-    }
-    if (!StringUtils.isEmpty(animalFilter.getDescricaoEs())){
-      predicates.add(builder.equal(builder.lower(root.get("especie").get("descricãoes")),
-              animalFilter.getDescricaoRa().toLowerCase()));
-    }
-    if (!StringUtils.isEmpty(animalFilter.getNomecliente())){
-      predicates.add(builder.equal(builder.lower(root.get("cliente").get("nomecliente")),
-              animalFilter.getNomecliente().toLowerCase()));
-    }
-
-    return predicates.toArray(new Predicate[predicates.size()]);
-}
 
   private void adicionarRestricoesDePaginacao(TypedQuery<AnimalDTO> query, Pageable pageable) {
   int paginaAtual = pageable.getPageNumber();
@@ -107,6 +74,39 @@ public class AnimalRepositoryImpl implements AnimalRepositoryQuery  {
 
     return manager.createQuery(criteria).getSingleResult();
 
+  }
+  private Predicate[] CriarRestricoes(AnimalFilter animalFilter, CriteriaBuilder builder, Root<Animal> root) {
+    List<Predicate> predicates = new ArrayList<>();
+    if (!StringUtils.isEmpty(animalFilter.getNomeanimal())){
+      predicates.add(builder.like(builder.lower(root.get("nomeanimal")),
+        "%" + animalFilter.getNomeanimal().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getIdade())){
+      predicates.add(builder.like(builder.lower(root.get("idade")),
+        "%" + animalFilter.getIdade().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getSexo())){
+      predicates.add(builder.like(builder.lower(root.get("sexo")),
+        "%" + animalFilter.getSexo().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getCastracao())){
+      predicates.add(builder.like(builder.lower(root.get("castração")),
+        "%" + animalFilter.getCastracao().toLowerCase() + "%"));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getDescricaoRa())){
+      predicates.add(builder.equal(builder.lower(root.get("raca").get("descricãora")),
+        animalFilter.getDescricaoRa().toLowerCase()));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getDescricaoEs())){
+      predicates.add(builder.equal(builder.lower(root.get("especie").get("descricãoes")),
+        animalFilter.getDescricaoRa().toLowerCase()));
+    }
+    if (!StringUtils.isEmpty(animalFilter.getNomecliente())){
+      predicates.add(builder.equal(builder.lower(root.get("cliente").get("nomecliente")),
+        animalFilter.getNomecliente().toLowerCase()));
+    }
+
+    return predicates.toArray(new Predicate[predicates.size()]);
   }
 
 
