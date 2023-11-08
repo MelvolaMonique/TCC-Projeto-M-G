@@ -39,23 +39,23 @@ public class Cliente {
         this.id = id;
     }
 
-    public String getNomecliente() {
-        return nomecliente;
-    }
+  public String getNomecliente() {
+    return nomecliente;
+  }
 
-    public void setNomecliente(String nomecliente) {
-        this.nomecliente = nomecliente;
-    }
+  public void setNomecliente(String nomecliente) {
+    this.nomecliente = nomecliente;
+  }
 
-    public String getEndereco() {
-        return endereco;
-    }
+  public String getEndereco() {
+    return endereco;
+  }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
+  public void setEndereco(String endereco) {
+    this.endereco = endereco;
+  }
 
-    public String getTele1() {
+  public String getTele1() {
         return tele1;
     }
 
@@ -115,4 +115,5 @@ public class Cliente {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

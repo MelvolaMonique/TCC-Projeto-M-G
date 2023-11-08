@@ -37,7 +37,7 @@ public class AgendaResource {
   public void remover(@PathVariable Integer id){agendaRepository.deleteById(id);}
 
   @PutMapping("/mudar-agenda/{id}")
-  public HttpStatus mudaragen(@PathVariable Integer id, @RequestBody Agenda agendaRequest){
+  public HttpStatus mudaragem(@PathVariable Integer id, @RequestBody Agenda agendaRequest){
     return agendaRepository.findById(id).map(
       agenda -> {
         agenda.setDatahora(agendaRequest.getDatahora());
