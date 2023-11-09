@@ -41,6 +41,7 @@ insert into especie(id, descricao_es) values (3, 'papagaio');
 insert into raca(id, descricao_ra) values (1,'siamês');
 insert into raca(id, descricao_ra) values (2,'husky siberiano');
 insert into raca(id, descricao_ra) values (3,'arara azul');
+
 -- insert Animal
 insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (1, 'lidia', '3','F','não',1,1,1);
 insert into animal(id, nomeanimal, idade, sexo, castracao,idcliente,idraca,idespecie) values (2, 'alberto', '1','M','sim',3,2,2);
