@@ -17,9 +17,9 @@ insert into medico(id,nomemedico, telefone, CPF,RG) values (2, 'Alberto','(14)99
 insert into medico(id,nomemedico, telefone, CPF,RG) values (3, 'Pamela','(14)98753-6317','455.540.145-86','12.845.454-2');
 
 -- Inserir na tabela "agenda"
-insert into agenda(id,datahora, idmedico) values (1,'2000-03-13', 1);
-insert into agenda(id,datahora, idmedico) values (2,'2012-12-23', 3);
-insert into agenda(id,datahora, idmedico) values (3,'2004-05-02', 2);
+insert into agenda(id,datahora, idmedico) values (1,'2000/03/13', 1);
+insert into agenda(id,datahora, idmedico) values (2,'2012/12/23', 3);
+insert into agenda(id,datahora, idmedico) values (3,'2004/05/02', 2);
 
 -- insert cidade
 insert into cidade(id, nomecidade, estado) values (1,'itatiba','SP');

@@ -1,19 +1,23 @@
 package br.com.etec.mogi.TCCprojeto.repository.filter;
 
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
+
 
 public class AgendaFilter {
 
-  private Date datahora;
+  @DateTimeFormat(pattern="yyyy/MM/dd")
+  private LocalDate datahora;
   private String nomemedico;
   private String telefone;
 
-
-  public Date getDatahora() {
+  public LocalDate getDatahora() {
     return datahora;
   }
 
-  public void setDatahora(Date datahora) {
+  public void setDatahora(LocalDate datahora) {
     this.datahora = datahora;
   }
 

@@ -1,6 +1,7 @@
 package br.com.etec.mogi.TCCprojeto.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ public class Agenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date datahora;
+    private LocalDate datahora;
 
     @ManyToOne
     @JoinColumn(name = "idmedico")
@@ -24,11 +25,11 @@ public class Agenda {
         this.id = id;
     }
 
-  public Date getDatahora() {
+  public LocalDate getDatahora() {
     return datahora;
   }
 
-  public void setDatahora(Date datahora) {
+  public void setDatahora(LocalDate datahora) {
     this.datahora = datahora;
   }
 

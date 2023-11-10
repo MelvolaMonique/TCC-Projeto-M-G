@@ -1,14 +1,15 @@
 package br.com.etec.mogi.TCCprojeto.repository.projections;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class AgendaDTO {
   private Integer id;
   private String nomemedico;
   private String telefone;
-  private Date datahora;
+  private LocalDate datahora;
 
-  public AgendaDTO(Integer id, String nomemedico, String telefone, Date datahora) {
+  public AgendaDTO(Integer id, String nomemedico, String telefone, LocalDate datahora) {
     this.id = id;
     this.nomemedico = nomemedico;
     this.telefone = telefone;
@@ -39,11 +40,11 @@ public class AgendaDTO {
     this.telefone = telefone;
   }
 
-  public Date getDatahora() {
+  public LocalDate getDatahora() {
     return datahora;
   }
 
-  public void setDatahora(Date datahora) {
+  public void setDatahora(LocalDate datahora) {
     this.datahora = datahora;
   }
 }
